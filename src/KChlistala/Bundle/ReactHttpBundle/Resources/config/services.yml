@@ -1,0 +1,51 @@
+parameters:
+    kchlistala_react_http.message_parser.class: GuzzleHttp\Message\MessageParser
+    kchlistala_react_http.request_parser.class: KChlistala\Bundle\ReactHttpBundle\Http\RequestParser
+    kchlistala_react_http.data_listener.class: KChlistala\Bundle\ReactHttpBundle\Server\DataListener
+    kchlistala_react_http.connection_listener.class: KChlistala\Bundle\ReactHttpBundle\Server\ConnectionListener
+    
+    kchlistala_react_http.react_event_loop.class: React\EventLoop\StreamSelectLoop
+    kchlistala_react_http.react_socket_server.class: React\Socket\Server
+
+    kchlistala_react_http.request_creator.class: KChlistala\Bundle\ReactHttpBundle\Creator\RequestCreator
+    kchlistala_react_http.response_creator.class: KChlistala\Bundle\ReactHttpBundle\Creator\ResponseCreator
+
+    kchlistala_react_http.kernel.class: AppKernel
+
+services:
+    kchlistala_react_http.message_parser:
+        class: %kchlistala_react_http.message_parser.class%
+
+    kchlistala_react_http.request_parser:
+        class: %kchlistala_react_http.request_parser.class%
+        arguments: [@kchlistala_react_http.message_parser]
+
+    kchlistala_react_http.data_listener:
+        class: %kchlistala_react_http.data_listener.class%
+        arguments: [@kchlistala_react_http.request_creator, @kchlistala_react_http.response_creator]
+
+    kchlistala_react_http.connection_listener:
+        class: %kchlistala_react_http.connection_listener.class%
+        arguments: [@kchlistala_react_http.data_listener]
+
+
+    kchlistala_react_http.react_event_loop:
+        class: %kchlistala_react_http.react_event_loop.class%
+
+    kchlistala_react_http.react_socket_server:
+        class: %kchlistala_react_http.react_socket_server.class%
+        arguments: [@kchlistala_react_http.react_event_loop]
+
+
+    kchlistala_react_http.request_creator:
+        class: %kchlistala_react_http.request_creator.class%
+        arguments: [@kchlistala_react_http.request_parser]
+
+    kchlistala_react_http.response_creator:
+        class: %kchlistala_react_http.response_creator.class%
+        arguments: [@kchlistala_react_http.kernel]
+
+
+    kchlistala_react_http.kernel:
+        class: %kchlistala_react_http.kernel.class%
+        arguments: [%kernel.environment%, false]

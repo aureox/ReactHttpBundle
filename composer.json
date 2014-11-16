@@ -1,0 +1,21 @@
+{
+    "name": "kchlistala/react-http-bundle",
+    "type": "symfony-bundle",
+    "version": "0.0.1",
+    "description": "React HTTP Bundle",
+    "keywords": ["ReactPHP", "React", "HTTP"],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": { "KChlistala\\Bundle": "src/" }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
+

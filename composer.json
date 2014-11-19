@@ -6,7 +6,9 @@
     "keywords": ["ReactPHP", "React", "HTTP"],
     "license": "MIT",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "react/socket": "0.4.*",
+        "guzzlehttp/guzzle": "~5.0"
     },
     "autoload": {
         "psr-0": { "KChlistala\\Bundle": "src/" }
